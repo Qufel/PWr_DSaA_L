@@ -126,7 +126,11 @@ public class Main {
 			if(word[0].equalsIgnoreCase("rem") && word.length==2) {
 				System.out.println(doc[currentDocNo].links.remove(new Link(word[1])));
 				continue;
-			}				
+			}
+			if(word[0].equalsIgnoreCase("remd") && word.length==1) {
+				System.out.println(doc[currentDocNo].links.removeDuplicate());
+				continue;
+			}
 			System.out.println("Wrong command");			
 		}
 		System.out.println("END OF EXECUTION");

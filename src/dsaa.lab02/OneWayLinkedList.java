@@ -268,19 +268,46 @@ public class OneWayLinkedList<E> implements IList<E>{
 
 		InnerIterator it = new InnerIterator();
 
-		E element;
 
-		while (it.hasNext()) {
-			element = it.next();
-			if (element.equals(e)) {
+		Element a = sentinel;
+		Element b = a.next;
 
-				remove(indexOf(element));
+		while (b != null) {
+
+			if (b.object.equals(e)) {
+				a.next = b.next;
 				return true;
-
 			}
+
+			a = b;
+			b = b.next;
+
 		}
 
 		return false;
+	}
+
+	public boolean removeDuplicate() {
+
+		if (isEmpty()) return false;
+
+		Element a = sentinel.next;
+		Element b = a.next;
+
+		while (b != null) {
+
+			if (a.object.equals(b.object)) {
+				a.next = b.next;
+				b = a.next;
+				continue;
+			}
+
+			a = b;
+			b = b.next;
+
+		}
+
+		return true;
 	}
 
 	/**

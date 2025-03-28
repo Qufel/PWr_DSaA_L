@@ -6,10 +6,17 @@ public class Link{
 	public Link(String ref) {
 		this.ref=ref;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
-		//TODO
-		return true;
+		if (!(obj instanceof Link)) return false;
+		Link link = (Link) obj;
+		return link.ref.equals(ref);
+	}
+
+	@Override
+	public String toString() {
+		return ref;
 	}
 	
 }
