@@ -7,10 +7,11 @@ import java.util.regex.Pattern;
 
 public class Document implements IWithName{
 	private static final int MODVALUE=100000000;
+	private static final int[] SEQUCENCE = {7, 11, 13, 17, 19};
 	public String name;
 	public TwoWayCycledOrderedListWithSentinel<Link> link;
 	public Document(String name) {
-		//TODO
+		this.name = name;
 	}
 
 	public Document(String name, Scanner scan) {
@@ -133,10 +134,28 @@ public class Document implements IWithName{
 
 	@Override
 	public String getName() {
-		// TODO
-		return null;
+		return name;
 	}
 
+	@Override
+	public int hashCode() {
+		char[] chars = name.toCharArray();
+		int hash = chars[0];
+		for (int i = 0; i < chars.length - 1; i++) {
+			hash = (hash * SEQUCENCE[i % 5] + chars[i + 1]) % MODVALUE;
+		}
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == null)
+			return false;
+		if (!(o instanceof Document))
+			return false;
+
+		return name.equals(((Document) o).name);
+	}
 
 }
 
