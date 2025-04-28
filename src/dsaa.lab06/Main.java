@@ -1,19 +1,10 @@
-package dsaa.lab04;
+package dsaa.lab06;
 import java.util.*;
 
 
 
-
 public class Main {
-
-
-
-
 	static Scanner scan; // for input stream
-
-
-
-
 
 	public static void main(String[] args) {
 		System.out.println("START");
@@ -69,8 +60,7 @@ public class Main {
 			if(word[0].equalsIgnoreCase("reverse") && word.length==1) {
 				System.out.println(doc[currentDocNo].toStringReverse());
 				continue;
-			}
-			// size
+			}				// size
 			if(word[0].equalsIgnoreCase("size") && word.length==1) {
 				System.out.println(doc[currentDocNo].link.size());
 				continue;
@@ -79,11 +69,22 @@ public class Main {
 			if(word[0].equalsIgnoreCase("add") && word.length==2) {
 				Link link=Document.createLink(word[1]);
 				if(link==null)
-				   System.out.println("error");
+					System.out.println("error");
 				else
-				   System.out.println(doc[currentDocNo].link.add(link));
+					System.out.println(doc[currentDocNo].link.add(link));
 				continue;
-			}		
+			}			
+			// addi index str
+			if(word[0].equalsIgnoreCase("addi") && word.length==3) {
+				int index=Integer.parseInt(word[1]);
+				try {
+					doc[currentDocNo].link.add(index, new Link(word[2]));
+				}
+				catch (NoSuchElementException e) {
+					System.out.println("error");
+				}
+				continue;
+			}			
 			// get index
 			if(word[0].equalsIgnoreCase("get") && word.length==2) {
 				int index=Integer.parseInt(word[1]);
@@ -95,7 +96,20 @@ public class Main {
 					System.out.println("error");
 				}
 				continue;
-			}					
+			}			
+			// set index str
+			if(word[0].equalsIgnoreCase("set") && word.length==3) {
+				int index=Integer.parseInt(word[1]);
+				try {
+					Link l=doc[currentDocNo].link.set(index,new Link(word[2]));
+					System.out.println(l.ref);
+				}
+				catch(NoSuchElementException e) {
+					System.out.println("error");
+				}
+
+				continue;
+			}			
 			// index str
 			if(word[0].equalsIgnoreCase("index") && word.length==2) {
 				int index=doc[currentDocNo].link.indexOf(new Link(word[1]));
@@ -123,20 +137,36 @@ public class Main {
 			if(word[0].equalsIgnoreCase("remall") && word.length==2) {
 				doc[currentDocNo].link.removeAll(new Link(word[1]));
 				continue;
-			}
-			// addl <indexOfListArray>
+			}			// addl <indexOfListArray>
 			if(word[0].equalsIgnoreCase("addl") && word.length==2) {
 				int number=Integer.parseInt(word[1]);
 				doc[currentDocNo].link.add(doc[number].link);
 				continue;
-			}
-			// lq
-			if(word[0].equalsIgnoreCase("lq") && word.length==1) {
-				int length = doc[currentDocNo].link.getLongestSequence();
-				System.out.println(length);
+			}	
+			if(word[0].equalsIgnoreCase("bubblesort") && word.length==1) {
+				doc[currentDocNo].bubbleSort(doc[currentDocNo].getWeights());
+				continue;
+			}	
+
+			if(word[0].equalsIgnoreCase("insertsort") && word.length==1) {
+				doc[currentDocNo].insertSort(doc[currentDocNo].getWeights());
+				continue;
+			}	
+
+			if(word[0].equalsIgnoreCase("selectsort") && word.length==1) {
+				doc[currentDocNo].selectSort(doc[currentDocNo].getWeights());
 				continue;
 			}
-			System.out.println("Wrong command");
+			if(word[0].equalsIgnoreCase("mergesort") && word.length==1) {
+				doc[currentDocNo].iterativeMergeSort(doc[currentDocNo].getWeights());
+				continue;
+			}	
+			if(word[0].equalsIgnoreCase("radixsort") && word.length==1) {
+				doc[currentDocNo].radixSort(doc[currentDocNo].getWeights());
+				continue;
+			}	
+
+			System.out.println("Wrong command");			
 		}
 		System.out.println("END OF EXECUTION");
 		scan.close();

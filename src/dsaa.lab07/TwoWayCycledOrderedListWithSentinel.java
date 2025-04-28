@@ -1,4 +1,4 @@
-package dsaa.lab04;
+package dsaa.lab07;
 
 import java.util.Iterator;
 import java.util.ListIterator;
@@ -211,8 +211,8 @@ public class TwoWayCycledOrderedListWithSentinel<E extends Comparable<E>> implem
 
 	@Override
 	public boolean contains(E element) {
-        return getElement(element) != null;
-    }
+		return getElement(element) != null;
+	}
 
 	@Override
 	public E get(int index) {
@@ -283,7 +283,7 @@ public class TwoWayCycledOrderedListWithSentinel<E extends Comparable<E>> implem
 		if (element == null)
 			throw new NoSuchElementException();
 
-        element.remove();
+		element.remove();
 		size--;
 
 		return element.object;
@@ -401,7 +401,7 @@ public class TwoWayCycledOrderedListWithSentinel<E extends Comparable<E>> implem
 			current = next;
 			next = current.next;
 
-        }
+		}
 
 		if (count > maxCount)
 			maxCount = count;
@@ -414,9 +414,9 @@ public class TwoWayCycledOrderedListWithSentinel<E extends Comparable<E>> implem
 
 		StringBuilder sb = new StringBuilder();
 
-        for (E e : this) {
-            sb.append(e.toString()).append(" ");
-        }
+		for (E e : this) {
+			sb.append(e.toString()).append(" ");
+		}
 
 		return sb.toString().trim();
 
